@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 type MockUser = {
     id: number;
@@ -6,6 +7,10 @@ type MockUser = {
 }
 
 export default async function MockUsers() {
+
+    const authObj = await auth();
+    const userObj = await currentUser();
+    console.log(userObj, authObj);
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
